@@ -1,0 +1,120 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "action": {
+        "type": "string",
+        "enum": ["make_notification", "create_todo_item", "update_todo_status", "ask_potential_todo", "create_habit_item", "update_habit_status"]
+      },
+      "arguments": {
+        "type": "object",
+        "oneOf": [
+          {
+            "if": {
+              "properties": { "action": { "const": "make_notification" } }
+            },
+            "then": {
+              "properties": {
+                "cushioning_type": {
+                  "type": "string",
+                  "enum": ["todo", "habit", "internal_monologue"]
+                },
+                "notification_sentence": {
+                  "type": "string"
+                }
+              },
+              "required": ["cushioning_type", "notification_sentence"],
+              "additionalProperties": false
+            }
+          },
+          {
+            "if": {
+              "properties": { "action": { "const": "create_todo_item" } }
+            },
+            "then": {
+              "properties": {
+                "snakecase_id": {
+                    "type": "string"
+                },
+                "todo_item_name": {
+                  "type": "string"
+                }
+              },
+              "required": ["snakecase_id","todo_item_name"],
+              "additionalProperties": false
+            }
+          },
+          {
+            "if": {
+              "properties": { "action": { "const": "create_habit_item" } }
+            },
+            "then": {
+              "properties": {
+                "snakecase_id": {
+                  "type": "string"
+                },
+                "habit_name": {
+                  "type": "string"
+                },
+                "habit_details": {
+                  "type": "string"
+                }
+              },
+              "required": ["snakecase_id","habit_name", "habit_details"],
+              "additionalProperties": false
+            }
+          },
+          {
+            "if": {
+              "properties": { "action": { "const": "update_todo_status" } }
+            },
+            "then": {
+              "properties": {
+                "snakecase_id": {
+                    "type": "string"
+                },
+                "new_habit_status": {
+                  "type": "string"
+                }
+              },
+              "required": ["snakecase_id","new_habit_status"],
+              "additionalProperties": false
+            }
+          },
+          {
+            "if": {
+              "properties": { "action": { "const": "update_habit_status" } }
+            },
+            "then": {
+              "properties": {
+                "snakecase_id": {
+                    "type": "string"
+                },
+                "new_status": {
+                  "type": "string"
+                }
+              },
+              "required": ["snakecase_id","new_status"],
+              "additionalProperties": false
+            }
+          },
+          {
+            "if": {
+              "properties": { "action": { "const": "ask_potential_todo" } }
+            },
+            "then": {
+              "properties": {
+                "potential_todo_question": {
+                  "type": "string"
+                }
+              },
+              "required": ["potential_todo_question"],
+              "additionalProperties": false
+            }
+          }
+        ]
+      }
+    },
+    "required": ["action", "arguments"],
+    "additionalProperties": false
+}

@@ -1,0 +1,4 @@
+/persistent/*
+/__pycache__/*
+/archive/*
+nohup.out

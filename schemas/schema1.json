@@ -1,0 +1,15 @@
+{
+    "schema": "https://kmrasmussen.com/completions",
+    "type": "object",
+    "properties": {
+        "cushioning_type": {
+            "type": "string",
+            "enum": ["todo", "habit", "internal_monologue"]
+        },
+        "notification_sentence": {
+            "type": "string"
+        }
+    },
+    "required": ["cushioning_type", "notification_sentence"],
+    "additionalProperties": false
+}
